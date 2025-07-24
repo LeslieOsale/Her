@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #4169e1 0%, #40e0d0 50%, #ffa6c9 100%);
+            font-family: 'Tangerine', cursive;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+            border: 2px solid #ffa6c9;
+        }
+        
+        h1 {
+            font-size: 4.5rem;
+            margin: 0;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            color: #ffa6c9;
+        }
+        
+        h2 {
+            font-size: 3rem;
+            margin: 10px 0 30px;
+            text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        p {
+            font-size: 2.2rem;
+            line-height: 1.5;
+            margin: 20px 0;
+        }
+        
+        .photo-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #40e0d0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            margin: 15px;
+        }
+        
+        .photo:hover {
+            transform: scale(1.05);
+        }
+        
+        .heart {
+            color: #ffa6c9;
+            font-size: 2.5rem;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .age-box {
+            background-color: rgba(64, 224, 208, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 2rem;
+            border: 1px solid #40e0d0;
+        }
+        
+        .footer {
+            font-size: 1.8rem;
+            margin-top: 30px;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 400px) {
+            .photo-container {
+                flex-direction: row !important;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+            }
+            .photo {
+                width: 90px;
+                height: 90px;
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container floating">
+        <h1>For You</h1>
+        <h2>My Beautiful <span class="heart">♥</span></h2>
+        
+        <div class="photo-container">
+            <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1753387442/her_z7eoqk.jpg" alt="The most beautiful girl" class="photo">
+            <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1753387427/me_mteuoa.jpg" alt="Me" class="photo">
+        </div>
+        
+        <p>Every moment with you feels like a dream I never want to wake up from...</p>
+        
+        <div class="age-box">
+            Today you are<br>
+            <span style="font-size: 2.5rem; color: #ffa6c9;">21 years, 5 months and 9 days</span><br>
+            of pure perfection
+        </div>
+        
+        <p>I wanted to create something as beautiful as you are,<br>
+        to show you how special you are to me.</p>
+        
+        <div class="footer">
+            With all my heart,<br>
+            <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1753267619/Leslie_Osale_j6phf5.jpg" alt="Leslie" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffa6c9; margin-top: 10px;">
+        </div>
+        <button id="open-letter-btn" style="margin-top: 35px; font-size: 2rem; background: #ffa6c9; color: #fff; border: none; border-radius: 20px; padding: 12px 36px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: background 0.3s;">Open Your Letter</button>
+    </div>
+    
+    <script>
+        // Add some floating hearts in the background
+        document.addEventListener('DOMContentLoaded', function() {
+            const colors = ['#4169e1', '#40e0d0', '#ffa6c9', '#ffffff'];
+            const container = document.body;
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '♥';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.opacity = Math.random() * 0.5 + 0.2;
+                heart.style.zIndex = '-1';
+                heart.style.animation = `floating ${Math.random() * 5 + 3}s ease-in-out infinite`;
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(heart);
+            }
+
+            // Button click handler
+            document.getElementById('open-letter-btn').addEventListener('click', function() {
+                window.location.href = 'loader.html?to=letter.html';
+            });
+        });
+    </script>
+</body>
+</html>

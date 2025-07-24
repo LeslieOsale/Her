@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        /* Enchanted Rose Loader Styles */
+        :root {
+            --dark-bg: #1a1a2e;
+            --rose-glow: #e83f6f;
+            --petal-color: #ff9bb3;
+            --glass-color: rgba(169, 204, 227, 0.15);
+            --text-glow: #ff7aa2;
+            --gold-accent: #d4af37;
+        }
+        
+        body {
+            background: linear-gradient(135deg, 
+                #4169e1 0%,      /* Royal Blue */
+                #50c878 35%,     /* Emerald Green */
+                #40e0d0 70%,     /* Turquoise */
+                #ffa6c9 100%     /* Carnation Pink */
+            );
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+        }
+        
+        .romantic-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #2a2a4a 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        
+        .display-case {
+            position: relative;
+            width: 300px;
+            height: 350px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .glass-dome {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--glass-color);
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 
+                0 0 30px rgba(169, 204, 227, 0.1),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: dome-glow 6s infinite alternate;
+            z-index: 2;
+        }
+        
+        .rose-image {
+            width: 180px;
+            height: auto;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 15px rgba(232, 63, 111, 0.6));
+            animation: float 4s ease-in-out infinite;
+            border-radius: 50%;
+        }
+
+        .falling-petal {
+            position: absolute;
+            background: var(--petal-color);
+            border-radius: 50% 50% 0 50%;
+            opacity: 0;
+            filter: drop-shadow(0 0 3px var(--rose-glow));
+            animation: falling linear infinite;
+            z-index: 0;
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 22px;
+            color: #ff7aa2;
+            opacity: 0;
+            animation: falling-heart linear infinite;
+            z-index: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 0 6px #e83f6f)
+                    drop-shadow(0 2px 8px #fff)
+                    drop-shadow(0 0 16px #ffa6c9); /* 3D/glow effect */
+            text-shadow:
+                1px 2px 2px #fff,
+                2px 4px 8px #e83f6f,
+                0 0 12px #ffa6c9;
+            /* 3D look with multiple shadows */
+            transform: perspective(80px) rotateX(10deg) rotateY(-8deg);
+        }
+
+        .loading-text {
+            color: var(--text-glow);
+            font-size: 22px;
+            font-weight: 300;
+            text-align: center;
+            margin-top: 40px;
+            max-width: 80%;
+            line-height: 1.5;
+            text-shadow: 0 0 10px var(--rose-glow);
+            animation: text-glow 3s infinite alternate;
+        }
+        
+        .romantic-message {
+            color: var(--petal-color);
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 30px;
+            text-align: center;
+            max-width: 80%;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+            animation-delay: 2s;
+        }
+        
+        @keyframes dome-glow {
+            0% { box-shadow: 0 0 30px rgba(169, 204, 227, 0.1); }
+            100% { box-shadow: 0 0 50px rgba(169, 204, 227, 0.3); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes falling {
+            0% { 
+                transform: translateY(-100px) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            100% { 
+                transform: translateY(400px) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes falling-heart {
+            0% {
+                transform: translateY(-100px) scale(0.8) rotate(-10deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            100% {
+                transform: translateY(400px) scale(1.2) rotate(20deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 10px var(--rose-glow); }
+            100% { text-shadow: 0 0 20px var(--rose-glow); }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        /* Hide loader when content is loaded */
+        .content-loaded .romantic-loader {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s, visibility 1s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Romantic Loader -->
+    <div class="romantic-loader">
+        <div class="display-case">
+            <div class="glass-dome"></div>
+            <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1753389075/roses_yg0mzq.png" alt="Enchanted Rose" class="rose-image">
+        </div>
+        
+        <div class="loading-text">Each petal holds a moment of our love...</div>
+        <div class="romantic-message">"Like this eternal rose, my love for you will never fade."</div>
+    </div>
+    
+    <!-- Your content goes here -->
+    <div class="main-content">
+        <!-- Your romantic content for her -->
+    </div>
+
+    <script>
+        // Create falling petals
+        function createPetals() {
+            const loader = document.querySelector('.romantic-loader');
+            const colors = ['#ff9bb3', '#ffb3c6', '#ffcad4', '#f8d6d6'];
+            
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'falling-petal';
+                
+                // Randomize petal appearance
+                const size = 15 + Math.random() * 25;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+                petal.style.animationDuration = `${5 + Math.random() * 10}s`;
+                petal.style.animationDelay = `${Math.random() * 5}s`;
+                petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+                loader.appendChild(petal);
+            }
+        }
+
+        // Create falling hearts
+        function createHearts() {
+            const loader = document.querySelector('.romantic-loader');
+            const heartColors = ['#ff7aa2', '#ffa6c9', '#e83f6f', '#fff']; // includes white
+            for (let i = 0; i < 18; i++) { // more hearts for effect
+                const heart = document.createElement('div');
+                heart.className = 'falling-heart';
+                heart.innerHTML = '♥';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${18 + Math.random() * 18}px`;
+                heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+                heart.style.animationDuration = `${5 + Math.random() * 10}s`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                // Add a little 3D tilt randomness
+                heart.style.transform = `perspective(80px) rotateX(${Math.random()*20-10}deg) rotateY(${Math.random()*16-8}deg)`;
+                loader.appendChild(heart);
+            }
+        }
+        
+        // Simulate loading
+        window.addEventListener('load', function() {
+            createPetals();
+            createHearts();
+
+            // Get ?to=... parameter from URL
+            function getToParam() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('to');
+            }
+
+            setTimeout(function() {
+                document.body.classList.add('content-loaded');
+                const to = getToParam();
+                if (to) {
+                    // Wait for the fade-out transition before redirecting
+                    setTimeout(function() {
+                        window.location.href = to;
+                    }, 1200); // matches the CSS transition duration
+                }
+            }, 6000); // Adjust time as needed
+        });
+    </script>
+</body>
+</html>
