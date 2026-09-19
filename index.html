@@ -21,6 +21,10 @@
     --glass-shadow: 0 18px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.28);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   html, body { margin: 0; padding: 0; }
 
   body {
@@ -166,6 +170,44 @@
     flex-wrap: wrap;
     gap: .9rem;
     justify-content: center;
+  }
+
+  .scroll-cue {
+    margin-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .45rem;
+    color: rgba(255, 217, 160, .85);
+    opacity: .9;
+  }
+
+  .scroll-cue__label {
+    font-size: .68rem;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: rgba(255, 217, 160, .82);
+  }
+
+  .scroll-cue__arrow {
+    width: 16px;
+    height: 16px;
+    border-right: 2px solid rgba(255, 217, 160, .9);
+    border-bottom: 2px solid rgba(255, 217, 160, .9);
+    transform: rotate(45deg);
+    animation: bounceDown 1.8s ease-in-out infinite;
+    display: block;
+  }
+
+  @keyframes bounceDown {
+    0%, 100% {
+      transform: rotate(45deg) translateY(0);
+      opacity: .65;
+    }
+    50% {
+      transform: rotate(45deg) translateY(8px);
+      opacity: 1;
+    }
   }
 
   /* ============ BUTTONS ============ */
@@ -601,6 +643,11 @@
     <div class="hero-actions">
       <button class="btn btn-primary" id="letterBtn">Read the letter <span>💌</span></button>
       <button class="btn" id="heartBtn">Send love <span>💖</span></button>
+    </div>
+
+    <div class="scroll-cue" aria-label="Scroll down for more">
+      <span class="scroll-cue__label">scroll down</span>
+      <span class="scroll-cue__arrow" aria-hidden="true"></span>
     </div>
   </section>
 
