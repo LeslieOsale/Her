@@ -520,6 +520,8 @@
     cursor: pointer;
     display: grid;
     place-items: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     transition: background .25s, transform .25s;
   }
   .modal__close:hover { background: rgba(255,255,255,.18); transform: rotate(90deg); }
@@ -1038,9 +1040,16 @@ function closeModal() {
   if (lastFocused && lastFocused.focus) lastFocused.focus();
 }
 
-modal.addEventListener('click', (e) => {
-  if (e.target.closest('[data-close]')) closeModal();
-});
+function handleModalCloseRequest(event) {
+  if (event.target.closest('[data-close]')) {
+    event.preventDefault();
+    closeModal();
+  }
+}
+
+modal.addEventListener('click', handleModalCloseRequest);
+modal.addEventListener('touchstart', handleModalCloseRequest, { passive: false });
+modal.addEventListener('pointerdown', handleModalCloseRequest, { passive: false });
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
